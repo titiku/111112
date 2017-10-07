@@ -7,6 +7,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import model.Calendar;
+import model.Dateday;
 
 public class MyAppTest {
 
@@ -14,9 +15,9 @@ public class MyAppTest {
 	@Test
 	public void testAdd() {
 		Calendar cal =new Calendar();
-		cal.save( "1/1/2017","ABCDEFG","Daily");
-		assertEquals(cal.getListtime().get(0), "1/1/2017");
-		assertEquals(cal.getListstr().get(0), "ABCDEFG");
+		Dateday date=new Dateday("01", "Oct", "2017");
+		cal.getList().add(date);
+		assertEquals(cal.getList().size(), 1);
 
 		
 	}
@@ -25,26 +26,13 @@ public class MyAppTest {
 	@Test
 	public void testDel() {
 		Calendar cal =new Calendar();
-		cal.save( "1/1/2017","ABCDEFG","Daily");
-		cal.delete(0);
-		assertEquals(cal.getListtime().size(), 0);
-		assertEquals(cal.getListtime().size(), 0);
+		Dateday date=new Dateday("01", "Oct", "2017");
+		cal.getList().add(date);
+		cal.getList().remove(date);
+		assertEquals(cal.getList().size(), 0);
+	
 		
 	}
-	
-	@Test
-	public void testEddit() {
-		Calendar cal =new Calendar();
-		cal.save( "1/1/2017","ABCDEFG","Daily");
-		cal.edit(0, "1/1/2017", "123","Daily");
-		assertEquals(cal.getListtime().get(0), "1/1/2017");
-		assertEquals(cal.getListstr().get(0), "123");
-		
-	}
-	
-	
-	
-	
 	
 	
 
