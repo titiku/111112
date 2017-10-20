@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 
 public class Calendar {
-	ArrayList<Dateday> list;
+	private ArrayList<Dateday> list;
 	public Calendar(){
 		list=new ArrayList<>();
 	}

@@ -1,10 +1,10 @@
 package model;
 
 public class Dateday {
-	String day;
-	String mount;
-	String year;
-	String text;
+	private String day;
+	private String mount;
+	private String year;
+	private String text;
 	
 	public Dateday(String day,String mount,String year){
 		this.day=day;

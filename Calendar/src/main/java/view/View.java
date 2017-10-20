@@ -46,13 +46,12 @@ public class View {
 
 	private JFrame frame;
 	private Calendar cal;
-	private JComboBox comboMouth;
+	private JComboBox comboMouth,comboyear;
 	private ArrayList<JButton> listday;
 	private JPanel panel;
 	private JLabel day1, day2, day3, day4, day5, day6, day7;
-	JButton btnAdd;
-	JComboBox comboyear;
-	Listen listen;
+	private JButton btnAdd,btnFind;
+	private Listen listen;
 
 	public View(Calendar cal) {
 		listen = new Listen();
@@ -72,6 +71,11 @@ public class View {
 		btnAdd.setBounds(478, 37, 70, 40);
 		frame.getContentPane().add(btnAdd);
 		btnAdd.addActionListener(listen);
+		
+		 btnFind = new JButton("Find");
+		btnFind.setBounds(580, 37, 70, 40);
+		frame.getContentPane().add(btnFind);
+		btnFind.addActionListener(listen);
 
 		JLabel lblMouth = new JLabel("Mouth");
 		lblMouth.setBounds(128, 41, 46, 14);
@@ -176,6 +180,57 @@ public class View {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Object src = e.getSource();
+			
+			if (src.equals(btnFind)) {
+				JFrame frame3 = new JFrame("Find");
+				frame3.setBounds(700, 0, 500, 400);
+				frame3.setVisible(true);
+
+				JPanel panel3 = new JPanel();
+				panel3.setBorder(new EmptyBorder(5, 5, 5, 5));
+				frame3.add(panel3);
+				panel3.setLayout(null);
+
+				JTextArea area = new JTextArea();
+				area.setEditable(false);
+
+				JScrollPane scrollPane = new JScrollPane();
+				scrollPane.setViewportView(area);
+				scrollPane.setBounds(40, 20, 400, 200);
+				panel3.add(scrollPane);
+
+				JDateChooser dateChooser = new JDateChooser();
+				dateChooser.setBounds(250, 260, 130, 30);
+				panel3.add(dateChooser);
+
+				JButton button = new JButton("Find");
+				button.setBounds(80, 260, 90, 30);
+				panel3.add(button);
+				button.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						String[] data = dateChooser.getDate().toString().split(" ");
+						String mount=data[1];
+						String year=data[5];
+						String day=data[2];
+						int c=0;
+						for (Dateday d:cal.getList()){
+							if (d.getDay().equals(day) && d.getMount().equals(mount) && d.getYear().equals(year)){
+								area.setText(d.getText());
+								c=1;
+							}
+						}
+						if (c==0){
+							area.setText("NULL");
+						}
+						
+						
+					}
+				});
+
+			}
+			
 
 			for (JButton but : listday) {
 				if (src.equals(but)) {
@@ -262,7 +317,7 @@ public class View {
 				frame2.setBounds(700, 0, 500, 400);
 				frame2.setVisible(true);
 
-				frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//				frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 				JPanel panel2 = new JPanel();
 				panel2.setBorder(new EmptyBorder(5, 5, 5, 5));
